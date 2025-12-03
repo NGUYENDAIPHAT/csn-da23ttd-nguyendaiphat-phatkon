@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Tài Khoản</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Vĩnh Long Di Tích</div>
+            <ul class="nav-links">
+                <li><a href="TrangChu.html">Trang Chủ</a></li>
+                <li><a href="DangNhap.html">Đăng Nhập</a></li>
+                <li><a href="DangKy.html">Đăng Ký</a></li>
+                <li><a href="TraCuu.html">Tra Cứu</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="auth-page">
+        <div class="auth-container">
+            <h2>Đăng Ký Tài Khoản</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="reg-username">Tên đăng nhập:</label>
+                    <input type="text" id="reg-username" name="username" required>
+                    <small style="color: #666;">3-20 ký tự, chỉ chữ, số và gạch dưới</small>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email:</label>
+                    <input type="email" id="reg-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Mật khẩu:</label>
+                    <input type="password" id="reg-password" name="password" required>
+                    <small style="color: #666;">Tối thiểu 6 ký tự</small>
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm-password">Xác nhận Mật khẩu:</label>
+                    <input type="password" id="reg-confirm-password" name="confirm_password" required>
+                </div>
+                <button type="submit" class="auth-button">Đăng Ký</button>
+                <p class="switch-link">Đã có tài khoản? <a href="DangNhap.html">Đăng nhập ngay</a></p>
+                <div id="register-message" class="message" style="display:none;"></div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col footer-col-info">
+                <div class="footer-logo">
+                    <span class="logo-text">DI TÍCH LỊCH SỬ VĨNH LONG</span>
+                </div>
+                <p class="site-description">
+                   Giúp người truy cập có thể tìm kiếm và tra cứu các địa điểm và di tích một cách nhanh nhất.
+                </p>
+                <p class="copyright">©2025 - All rights reserved</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Về Chúng Tôi</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-col-contact">
+                <h3 class="footer-heading">Thông Tin</h3>
+                <ul class="contact-info">
+                    <li>Số 128, Nguyễn Thiện Thành, Vĩnh Long</li>
+                    <li>(+84)397923776</li>
+                    <li>vinhlong2025@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script xử lý đăng ký -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const registerForm = document.getElementById('registerForm');
+            const message = document.getElementById('register-message');
+            
+            if (!registerForm) {
+                console.error('Không tìm thấy form đăng ký');
+                return;
+            }
+            
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(registerForm);
+                
+                // Hiển thị loading
+                message.textContent = '⏳ Đang xử lý...';
+                message.className = 'message';
+                message.style.display = 'block';
+                
+                try {
+                    const response = await fetch('register.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const data = await response.json();
+                    
+                    message.textContent = data.message;
+                    message.className = data.success ? 'message success-message' : 'message error-message';
+                    message.style.display = 'block';
+                    
+                    if (data.success) {
+                        registerForm.reset();
+                        setTimeout(() => {
+                            window.location.href = 'DangNhap.html';
+                        }, 1500);
+                    }
+                    
+                } catch (error) {
+                    console.error('Lỗi:', error);
+                    message.textContent = '❌ Có lỗi xảy ra. Vui lòng thử lại!';
+                    message.className = 'message error-message';
+                    message.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

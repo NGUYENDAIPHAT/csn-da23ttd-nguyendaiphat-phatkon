@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra Cứu Di Tích</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Vĩnh Long Di Tích</div>
+            <ul class="nav-links">
+                <li><a href="TrangChu.html">Trang Chủ</a></li>
+                <li id="user-display"><a href="DangNhap.html">Đăng Nhập</a></li>
+                <li><a href="DangKy.html">Đăng Ký</a></li>
+                <li><a href="TraCuu.html">Tra Cứu</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="search-page">
+        <div class="search-container">
+            <h2> Tra Cứu Di Tích Lịch Sử</h2>
+            
+            <!-- Bộ lọc -->
+            <div class="filter-section">
+                <h3>Bộ lọc tìm kiếm</h3>
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label for="filter-tinh"> Tỉnh/Thành phố:</label>
+                        <select id="filter-tinh">
+                            <option value="">Tất cả</option>
+                            <option value="Vĩnh Long">Vĩnh Long</option>
+                            <option value="Trà Vinh">Trà Vinh</option>
+                            <option value="Bến Tre">Bến Tre</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filter-loai"> Loại di tích:</label>
+                        <select id="filter-loai">
+                            <option value="">Tất cả</option>
+                            <option value="Di tích tôn giáo">Di tích tôn giáo</option>
+                            <option value="Di tích lịch sử">Di tích lịch sử</option>
+                            <option value="Di tích kiến trúc">Di tích kiến trúc</option>
+                            <option value="Di tích văn hóa">Di tích văn hóa</option>
+                            <option value="Di tích nghề truyền thống">Di tích nghề truyền thống</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="reset-filter" class="reset-button"> Đặt lại bộ lọc</button>
+            </div>
+            
+            <!-- Tìm kiếm -->
+            <div class="search-box">
+                <div class="search-input-group">
+                    <input type="text" id="search-input" placeholder=" Nhập tên di tích, địa chỉ, hoặc từ khóa...">
+                    <button id="search-button">Tìm Kiếm</button>
+                </div>
+            </div>
+            
+            <!-- Gợi ý tìm kiếm nhanh -->
+            <div class="quick-search">
+                <p><strong>Tìm kiếm nhanh:</strong></p>
+                <div class="quick-tags">
+                    <button class="tag" data-keyword="Bác Hồ">Bác Hồ</button>
+                    <button class="tag" data-keyword="chùa">Chùa</button>
+                    <button class="tag" data-keyword="đình">Đình</button>
+                    <button class="tag" data-keyword="nhà thờ">Nhà thờ</button>
+                    <button class="tag" data-keyword="bảo tàng">Bảo tàng</button>
+                </div>
+            </div>
+            
+            <!-- Kết quả -->
+            <div id="search-results" class="results-list">
+                <p class="no-results-msg">Hãy nhập từ khóa hoặc chọn bộ lọc để bắt đầu tìm kiếm.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col footer-col-info">
+                <div class="footer-logo">
+                    <span class="logo-text">DI TÍCH LỊCH SỬ VĨNH LONG</span>
+                </div>
+                <p class="site-description">
+                   Giúp người truy cập có thể tìm kiếm và tra cứu các địa điểm và di tích một cách nhanh nhất.
+                </p>
+                <p class="copyright">©2025 - All rights reserved</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Về Chúng Tôi</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-col-contact">
+                <h3 class="footer-heading">Thông Tin</h3>
+                <ul class="contact-info">
+                    <li>Số 128, Nguyễn Thiện Thành, Vĩnh Long</li>
+                    <li>(+84)397923776</li>
+                    <li>vinhlong2025@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <!-- Script bổ sung để đảm bảo link hoạt động -->
+    <script>
+        // Đảm bảo link trong kết quả tìm kiếm hoạt động
+        document.addEventListener('click', function(e) {
+            // Nếu click vào link chi tiết
+            if (e.target.tagName === 'A' && e.target.href && e.target.href.includes('chitiet.php')) {
+                console.log('Navigating to:', e.target.href);
+                // Cho phép link hoạt động bình thường
+                return true;
+            }
+        });
+    </script>
+</body>
+</html>
