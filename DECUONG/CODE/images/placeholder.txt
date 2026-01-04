@@ -1,0 +1,9 @@
+Thư mục chứa ảnh các di tích lịch sử
+Cấu trúc: images/[id]_[ten_ditich].jpg
+
+Ví dụ:
+- images/1_khu_tuong_niem_bac_ho.jpg
+- images/2_van_thanh_mieu_vinh_long.jpg
+- images/3_chua_tien_chau.jpg
+
+Lưu ý: Tên file không có dấu, viết thường, thay khoảng trắng bằng dấu gạch dưới

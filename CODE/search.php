@@ -37,10 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     
     // Nếu không có điều kiện nào, lấy tất cả
     if (empty($conditions)) {
-        $sql = "SELECT * FROM ditich ORDER BY ten_ditich ASC LIMIT 50";
+        $sql = "SELECT id, ten_ditich, dia_chi, mo_ta, loai_ditich, nam_xay_dung, tinh, hinh_anh FROM ditich ORDER BY ten_ditich ASC LIMIT 50";
         $result = mysqli_query($conn, $sql);
     } else {
-        $sql = "SELECT * FROM ditich WHERE " . implode(' AND ', $conditions) . " ORDER BY ten_ditich ASC";
+        $sql = "SELECT id, ten_ditich, dia_chi, mo_ta, loai_ditich, nam_xay_dung, tinh, hinh_anh FROM ditich WHERE " . implode(' AND ', $conditions) . " ORDER BY ten_ditich ASC";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, $types, ...$params);
         mysqli_stmt_execute($stmt);
@@ -64,7 +64,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     } else {
         echo json_encode(['success' => false, 'message' => 'Không tìm thấy kết quả!']);
     }
-    mysqli_stmt_close($stmt);
+    
+    // Chỉ đóng statement nếu nó được tạo
+    if (!empty($conditions) && isset($stmt)) {
+        mysqli_stmt_close($stmt);
+    }
 }
 mysqli_close($conn);
 ?>

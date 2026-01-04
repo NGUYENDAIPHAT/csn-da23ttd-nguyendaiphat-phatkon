@@ -26,7 +26,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
             
-            echo "<script>alert('Đăng nhập thành công!'); window.location.href='TrangChu.html';</script>";
+            // Kiểm tra nếu có redirect parameter
+            $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'TrangChu.html';
+            
+            // Validate redirect URL để tránh open redirect
+            $allowed_redirects = ['TrangChu.html', 'TraCuu.html'];
+            if (!in_array($redirect, $allowed_redirects)) {
+                $redirect = 'TrangChu.html';
+            }
+            
+            echo "<script>
+                alert('🎉 Đăng nhập thành công! Chào mừng bạn trở lại!'); 
+                window.location.href='TrangChu.html';
+            </script>";
         } else {
             echo "<script>alert('Mật khẩu không đúng!'); window.location.href='DangNhap.html';</script>";
         }

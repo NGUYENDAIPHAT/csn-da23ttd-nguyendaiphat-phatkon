@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="map-styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Vĩnh Long Di Tích</div>
+            <ul class="nav-links">
+                <li><a href="TrangChu.html">Trang Chủ</a></li>
+                <li><a href="TraCuu.html">Tra Cứu</a></li>
+                <li><a href="DangNhap.html">Đăng Nhập</a></li>
+                <li><a href="DangKy.html">Đăng Ký</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1> Đăng Nhập Tài Khoản</h1>
+                <p>Đăng nhập để trải nghiệm đầy đủ tính năng bản đồ di tích</p>
+            </div>
+        </section>
+
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-layout">
+                    <div class="auth-form-container">
+                        <div class="auth-card">
+                            <h2>Đăng Nhập</h2>
+                            <form action="login.php" method="POST">
+                                <div class="form-group">
+                                    <label for="username">Tên đăng nhập:</label>
+                                    <input type="text" id="username" name="username" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mật khẩu:</label>
+                                    <input type="password" id="password" name="password" required>
+                                </div>
+                                <button type="submit" class="auth-button">Đăng Nhập</button>
+                                <p class="switch-link">Chưa có tài khoản? <a href="DangKy.html">Đăng ký ngay</a></p>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-info-container">
+                        <div class="feature-highlight">
+                            <h3>🗺️ Khám Phá Bản Đồ Di Tích</h3>
+                            <p>Sau khi đăng nhập, bạn có thể:</p>
+                            <ul>
+                                <li> Xem vị trí chính xác của 50+ di tích lịch sử</li>
+                                <li> Tìm kiếm di tích theo tỉnh và loại</li>
+                                <li>Sử dụng bản đồ tương tác trên mọi thiết bị</li>
+                                <li> Xem thống kê chi tiết các di tích</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col footer-col-info">
+                <div class="footer-logo">
+                    <span class="logo-text">DI TÍCH LỊCH SỬ VĨNH LONG</span>
+                </div>
+                <p class="site-description">
+                   Giúp người truy cập có thể tìm kiếm và tra cứu các địa điểm và di tích một cách nhanh nhất.
+                </p>
+                <p class="copyright">©2025 - All rights reserved</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Về Chúng Tôi</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="BanDo_Demo.html" style="color: #4CAF50; font-weight: bold;">🗺️ Xem Bản Đồ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-col-contact">
+                <h3 class="footer-heading">Thông Tin</h3>
+                <ul class="contact-info">
+                    <li>Số 128, Nguyễn Thiện Thành, Vĩnh Long</li>
+                    <li>(+84)397923776</li>
+                    <li>vinhlong2025@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

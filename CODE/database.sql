@@ -39,10 +39,13 @@ CREATE TABLE IF NOT EXISTS ditich (
     nam_xay_dung VARCHAR(50),
     tinh VARCHAR(50),
     hinh_anh VARCHAR(255),
+    latitude DECIMAL(10, 8) NULL,
+    longitude DECIMAL(11, 8) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_ten_ditich (ten_ditich),
     INDEX idx_loai_ditich (loai_ditich),
-    INDEX idx_tinh (tinh)
+    INDEX idx_tinh (tinh),
+    INDEX idx_coordinates (latitude, longitude)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ═══════════════════════════════════════════════════════════════
@@ -145,13 +148,91 @@ INSERT INTO ditich (ten_ditich, dia_chi, mo_ta, loai_ditich, nam_xay_dung) VALUE
  'Xã Tân Hòa, Huyện Vũng Liêm, Vĩnh Long', 
  'Nhà thờ Công giáo với kiến trúc đẹp, là trung tâm sinh hoạt tôn giáo của cộng đồng Công giáo tại Vũng Liêm. Nhà thờ có kiến trúc kết hợp giữa phong cách truyền thống và hiện đại, là điểm nhấn kiến trúc tôn giáo của vùng.', 
  'Di tích tôn giáo', 
- '1920');
+ '1920'),
+
+-- ═══════════════════════════════════════════════════════════════
+-- DI TÍCH TRÀ VINH
+-- ═══════════════════════════════════════════════════════════════
+
+('Ao Bà Om', 
+ 'Phường 8, Thành phố Trà Vinh, Trà Vinh', 
+ 'Ao Bà Om là một di tích văn hóa tâm linh nổi tiếng của đồng bào Khmer Nam Bộ, có diện tích khoảng 90ha. Đây là nơi tổ chức lễ hội Ok Om Bok (lễ cúng trăng) hàng năm của người Khmer. Ao có hình dáng giống như chiếc lá Bodhi thiêng liêng trong Phật giáo, xung quanh có nhiều cây cổ thụ và chùa Khmer. Ao Bà Om không chỉ là địa điểm tâm linh mà còn là công viên sinh thái, nơi nghỉ dưỡng và du lịch của người dân và du khách.', 
+ 'Di tích văn hóa', 
+ '1200'),
+
+('Bà Biển Ba Động', 
+ 'Xã Ba Động, Huyện Trà Cú, Trà Vinh', 
+ 'Bà Biển Ba Động là một di tích tâm linh quan trọng của tỉnh Trà Vinh, nơi thờ Thiên Y A Na (Bà Biển) - vị thần bảo hộ của ngư dân và người dân vùng biển. Đền thờ được xây dựng theo kiến trúc truyền thống Nam Bộ, có không gian trang nghiêm và linh thiêng. Hàng năm, nơi đây tổ chức nhiều lễ hội truyền thống, đặc biệt là lễ hội Nghinh Ông (rước cá Ông) vào tháng 8 âm lịch. Đây là nơi gửi gắm niềm tin và lòng thành kính của ngư dân với biển cả, cầu mong được bình an và mưa thuận gió hòa.', 
+ 'Di tích tôn giáo', 
+ '1850'),
+
+('Biển Ba Động', 
+ 'Xã Ba Động, Huyện Trà Cú, Trà Vinh', 
+ 'Biển Ba Động là một trong những bãi biển đẹp và hoang sơ nhất của tỉnh Trà Vinh, nằm ở cực Nam của huyện Trà Cú. Bãi biển có cát trắng mịn, nước trong xanh và sóng êm ái, là điểm đến lý tưởng cho du lịch sinh thái biển. Khu vực này còn có hệ sinh thái rừng ngập mặn phong phú, là nơi cư trú của nhiều loài chim quý hiếm. Biển Ba Động không chỉ có giá trị du lịch mà còn là nguồn sinh kế quan trọng của ngư dân địa phương, nơi có nhiều loại hải sản tươi ngon. Đây cũng là địa điểm tổ chức các lễ hội biển truyền thống của người dân vùng ven biển Trà Vinh.', 
+ 'Di tích tự nhiên', 
+ 'Tự nhiên');
+
+-- ═══════════════════════════════════════════════════════════════
+-- CẬP NHẬT THÔNG TIN TỈNH CHO CÁC DI TÍCH
+-- ═══════════════════════════════════════════════════════════════
+
+-- Cập nhật tỉnh cho các di tích Vĩnh Long (những di tích không có thông tin tỉnh)
+UPDATE ditich SET tinh = 'Vĩnh Long' WHERE tinh IS NULL OR tinh = '';
+
+-- ═══════════════════════════════════════════════════════════════
+-- CẬP NHẬT TỌA ĐỘ GPS CHO CÁC DI TÍCH
+-- ═══════════════════════════════════════════════════════════════
+
+-- Cập nhật tọa độ cho Ao Bà Om (Trà Vinh)
+UPDATE ditich SET 
+    latitude = 9.9347222, 
+    longitude = 106.3425000 
+WHERE ten_ditich = 'Ao Bà Om';
+
+-- Cập nhật tọa độ cho Bà Biển Ba Động (Trà Vinh)
+UPDATE ditich SET 
+    latitude = 9.7500000, 
+    longitude = 106.4833333 
+WHERE ten_ditich = 'Bà Biển Ba Động';
+
+-- Cập nhật tọa độ cho Biển Ba Động (Trà Vinh)
+UPDATE ditich SET 
+    latitude = 9.7400000, 
+    longitude = 106.4900000 
+WHERE ten_ditich = 'Biển Ba Động';
+
+-- Cập nhật tọa độ cho một số di tích Vĩnh Long chính
+UPDATE ditich SET 
+    latitude = 10.2397222, 
+    longitude = 105.9722222 
+WHERE ten_ditich = 'Khu Tưởng Niệm Bác Hồ';
+
+UPDATE ditich SET 
+    latitude = 10.2530556, 
+    longitude = 105.9719444 
+WHERE ten_ditich = 'Văn Thánh Miếu Vĩnh Long';
+
+UPDATE ditich SET 
+    latitude = 10.2500000, 
+    longitude = 105.9700000 
+WHERE ten_ditich = 'Bảo tàng tỉnh Vĩnh Long';
+
+UPDATE ditich SET 
+    latitude = 10.2525000, 
+    longitude = 105.9708333 
+WHERE ten_ditich = 'Chùa Ông (Quán Đế Miếu)';
 
 -- ═══════════════════════════════════════════════════════════════
 -- THỐNG KÊ DỮ LIỆU
 -- ═══════════════════════════════════════════════════════════════
 
 SELECT 'Tổng số di tích:' AS Thong_ke, COUNT(*) AS So_luong FROM ditich
+UNION ALL
+SELECT 'Di tích Vĩnh Long:', COUNT(*) FROM ditich WHERE tinh = 'Vĩnh Long'
+UNION ALL
+SELECT 'Di tích Trà Vinh:', COUNT(*) FROM ditich WHERE tinh = 'Trà Vinh'
+UNION ALL
+SELECT 'Di tích có tọa độ GPS:', COUNT(*) FROM ditich WHERE latitude IS NOT NULL AND longitude IS NOT NULL
 UNION ALL
 SELECT 'Di tích kiến trúc:', COUNT(*) FROM ditich WHERE loai_ditich = 'Di tích kiến trúc'
 UNION ALL
@@ -161,10 +242,10 @@ SELECT 'Di tích lịch sử:', COUNT(*) FROM ditich WHERE loai_ditich = 'Di tí
 UNION ALL
 SELECT 'Di tích văn hóa:', COUNT(*) FROM ditich WHERE loai_ditich = 'Di tích văn hóa'
 UNION ALL
-SELECT 'Di tích nghề truyền thống:', COUNT(*) FROM ditich WHERE loai_ditich = 'Di tích nghề truyền thống';
+SELECT 'Di tích nghề truyền thống:', COUNT(*) FROM ditich WHERE loai_ditich = 'Di tích nghề truyền thống'
+UNION ALL
+SELECT 'Di tích tự nhiên:', COUNT(*) FROM ditich WHERE loai_ditich = 'Di tích tự nhiên';
 
 -- ═══════════════════════════════════════════════════════════════
 -- HOÀN TẤT
--- ═══════════════════════════════════════════════════════════════
--- Database đã sẵn sàng với 15 di tích lịch sử Vĩnh Long!
 -- ═══════════════════════════════════════════════════════════════

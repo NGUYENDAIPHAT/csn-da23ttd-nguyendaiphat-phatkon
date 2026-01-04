@@ -3,8 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Nhập</title>
+    <title>Đăng Nhập - Di Tích Vĩnh Long</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Enhanced Login Page Styles */
+        .login-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.3;
+        }
+        
+
+        
+        .login-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+        
+        .login-icon i {
+            font-size: 2em;
+            color: white;
+        }
+        
+        .login-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .login-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            font-size: 1.1em;
+            z-index: 2;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+            background: white;
+        }
+        
+        .form-group input:focus + .input-wrapper i {
+            color: #4CAF50;
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .login-button:hover::before {
+            left: 100%;
+        }
+        
+        .login-button:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+        }
+        
+        .login-button:active {
+            transform: translateY(0);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e9ecef;
+        }
+        
+        .divider span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 15px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .switch-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+        }
+        
+        .switch-link a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .switch-link a:hover {
+            color: #45a049;
+            text-decoration: underline;
+        }
+        
+        .features-preview {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .features-preview h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 0.9em;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-card {
+                padding: 30px 20px;
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .login-title {
+                font-size: 1.7em;
+            }
+            
+            .login-icon {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .login-icon i {
+                font-size: 1.7em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 25px 15px;
+            }
+            
+            .login-title {
+                font-size: 1.5em;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,28 +300,62 @@
             <div class="logo">Vĩnh Long Di Tích</div>
             <ul class="nav-links">
                 <li><a href="TrangChu.html">Trang Chủ</a></li>
-                <li><a href="DangNhap.html">Đăng Nhập</a></li>
-                <li><a href="DangKy.html">Đăng Ký</a></li>
                 <li><a href="TraCuu.html">Tra Cứu</a></li>
+                <li><a href="DangNhap.html" class="active">Đăng Nhập</a></li>
+                <li><a href="DangKy.html">Đăng Ký</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="auth-page">
-        <div class="auth-container">
-            <h2>ĐĂNG NHẬP</h2>
-            <form action="login.php" method="POST">
-                <div class="form-group">
-                    <label for="username">Tên đăng nhập:</label>
-                    <input type="text" id="username" name="username" required>
+    <main class="login-page">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="login-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h1 class="login-title">Đăng Nhập</h1>
+                    <p class="login-subtitle">Khám phá di tích lịch sử Vĩnh Long</p>
                 </div>
-                <div class="form-group">
-                    <label for="password">Mật khẩu:</label>
-                    <input type="password" id="password" name="password" required>
+                
+                <form action="login.php" method="POST" id="loginForm">
+                    <div class="form-group">
+                        <label for="username">
+                            <i class="fas fa-user"></i> Tên đăng nhập
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i> Mật khẩu
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="login-button">
+                        <i class="fas fa-sign-in-alt"></i> Đăng Nhập
+                    </button>
+                </form>
+                
+                <div class="divider">
+                    <span>hoặc</span>
                 </div>
-                <button type="submit" class="auth-button">Đăng Nhập</button>
-                <p class="switch-link">Chưa có tài khoản? <a href="DangKy.html">Đăng ký ngay</a></p>
-            </form>
+                
+                <p class="switch-link">
+                    Chưa có tài khoản? 
+                    <a href="DangKy.html">
+                        <i class="fas fa-user-plus"></i> Đăng ký ngay
+                    </a>
+                </p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -54,6 +376,7 @@
                     <li><a href="#">Giới thiệu</a></li>
                     <li><a href="#">Liên hệ</a></li>
                     <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="BanDo_Demo.html" style="color: #4CAF50; font-weight: bold;"> Xem Bản Đồ</a></li>
                 </ul>
             </div>
             <div class="footer-col footer-col-contact">
@@ -68,5 +391,160 @@
     </footer>
 
     <script src="script.js"></script>
+</body>
+</html>
+    <script src="script.js"></script>
+    
+    <!-- Enhanced Login Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form validation and enhancement
+            const loginForm = document.getElementById('loginForm');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const loginButton = document.querySelector('.login-button');
+            
+            // Add floating label effect
+            function addFloatingLabelEffect(input) {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (this.value === '') {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+                
+                // Check if input has value on page load
+                if (input.value !== '') {
+                    input.parentElement.classList.add('focused');
+                }
+            }
+            
+            addFloatingLabelEffect(usernameInput);
+            addFloatingLabelEffect(passwordInput);
+            
+            // Enhanced form submission
+            loginForm.addEventListener('submit', function(e) {
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+                
+                // Basic validation
+                if (username === '' || password === '') {
+                    e.preventDefault();
+                    showMessage('Vui lòng nhập đầy đủ thông tin!', 'error');
+                    return;
+                }
+                
+                if (username.length < 3) {
+                    e.preventDefault();
+                    showMessage('Tên đăng nhập phải có ít nhất 3 ký tự!', 'error');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    e.preventDefault();
+                    showMessage('Mật khẩu phải có ít nhất 6 ký tự!', 'error');
+                    return;
+                }
+                
+                // Show loading state
+                loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang đăng nhập...';
+                loginButton.disabled = true;
+            });
+            
+            // Show message function
+            function showMessage(message, type) {
+                // Remove existing messages
+                const existingMessage = document.querySelector('.login-message');
+                if (existingMessage) {
+                    existingMessage.remove();
+                }
+                
+                // Create new message
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `login-message ${type}`;
+                messageDiv.innerHTML = `
+                    <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i>
+                    ${message}
+                `;
+                
+                // Add styles
+                messageDiv.style.cssText = `
+                    padding: 12px 15px;
+                    border-radius: 8px;
+                    margin-top: 15px;
+                    text-align: center;
+                    font-weight: 500;
+                    animation: slideInDown 0.3s ease;
+                    ${type === 'error' ? 
+                        'background: #fee; color: #c33; border: 1px solid #fcc;' : 
+                        'background: #efe; color: #363; border: 1px solid #cfc;'
+                    }
+                `;
+                
+                // Insert message
+                loginForm.appendChild(messageDiv);
+                
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.remove();
+                    }
+                }, 5000);
+            }
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Enter key to submit form
+                if (e.key === 'Enter' && (usernameInput === document.activeElement || passwordInput === document.activeElement)) {
+                    loginForm.dispatchEvent(new Event('submit'));
+                }
+            });
+            
+            // Add input animations
+            const inputs = document.querySelectorAll('.form-group input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+        
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .input-wrapper.focused input {
+                border-color: #4CAF50;
+                box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+            }
+            
+            .input-wrapper.focused i {
+                color: #4CAF50;
+            }
+            
+            .navbar .nav-links a.active {
+                background-color: #388E3C;
+                border-radius: 5px;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>

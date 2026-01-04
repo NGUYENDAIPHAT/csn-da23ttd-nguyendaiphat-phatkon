@@ -3,8 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Ký Tài Khoản</title>
+    <title>Đăng Ký Tài Khoản - Di Tích Vĩnh Long</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Enhanced Register Page Styles */
+        .register-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .register-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+
+        
+        .register-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .register-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .register-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .register-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+        
+        .register-icon i {
+            font-size: 2em;
+            color: white;
+        }
+        
+        .register-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .register-subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            font-size: 1.1em;
+            z-index: 2;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+            background: white;
+        }
+        
+        .form-group input:focus + .input-wrapper i {
+            color: #4CAF50;
+        }
+        
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.8em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .register-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .register-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .register-button:hover::before {
+            left: 100%;
+        }
+        
+        .register-button:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+        }
+        
+        .register-button:active {
+            transform: translateY(0);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e9ecef;
+        }
+        
+        .divider span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 15px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .switch-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+        }
+        
+        .switch-link a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .switch-link a:hover {
+            color: #45a049;
+            text-decoration: underline;
+        }
+        
+        .benefits-preview {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .benefits-preview h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+        
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .benefit-list li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 0.9em;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .benefit-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        /* Password Strength Indicator */
+        .password-strength {
+            margin-top: 8px;
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .strength-weak { background: #e74c3c; width: 25%; }
+        .strength-fair { background: #f39c12; width: 50%; }
+        .strength-good { background: #f1c40f; width: 75%; }
+        .strength-strong { background: #27ae60; width: 100%; }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .register-card {
+                padding: 30px 20px;
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .register-title {
+                font-size: 1.7em;
+            }
+            
+            .register-icon {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .register-icon i {
+                font-size: 1.7em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .register-card {
+                padding: 25px 15px;
+            }
+            
+            .register-title {
+                font-size: 1.5em;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,39 +330,87 @@
             <div class="logo">Vĩnh Long Di Tích</div>
             <ul class="nav-links">
                 <li><a href="TrangChu.html">Trang Chủ</a></li>
-                <li><a href="DangNhap.html">Đăng Nhập</a></li>
-                <li><a href="DangKy.html">Đăng Ký</a></li>
                 <li><a href="TraCuu.html">Tra Cứu</a></li>
+                <li><a href="DangNhap.html">Đăng Nhập</a></li>
+                <li><a href="DangKy.html" class="active">Đăng Ký</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="auth-page">
-        <div class="auth-container">
-            <h2>Đăng Ký Tài Khoản</h2>
-            <form id="registerForm">
-                <div class="form-group">
-                    <label for="reg-username">Tên đăng nhập:</label>
-                    <input type="text" id="reg-username" name="username" required>
-                    <small style="color: #666;">3-20 ký tự, chỉ chữ, số và gạch dưới</small>
+    <main class="register-page">
+        <div class="register-container">
+            <div class="register-card">
+                <div class="register-header">
+                    <div class="register-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h1 class="register-title">Đăng Ký</h1>
+                    <p class="register-subtitle">Tạo tài khoản để khám phá di tích</p>
                 </div>
-                <div class="form-group">
-                    <label for="reg-email">Email:</label>
-                    <input type="email" id="reg-email" name="email" required>
+                
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="reg-username">
+                            <i class="fas fa-user"></i> Tên đăng nhập
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="reg-username" name="username" placeholder="Nhập tên đăng nhập" required>
+                        </div>
+                        <small>3-20 ký tự, chỉ chữ, số và gạch dưới</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-email">
+                            <i class="fas fa-envelope"></i> Email
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="reg-email" name="email" placeholder="Nhập địa chỉ email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-password">
+                            <i class="fas fa-lock"></i> Mật khẩu
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="reg-password" name="password" placeholder="Nhập mật khẩu" required>
+                        </div>
+                        <div class="password-strength">
+                            <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                        </div>
+                        <small id="passwordStrengthText">Tối thiểu 6 ký tự</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-confirm-password">
+                            <i class="fas fa-lock"></i> Xác nhận mật khẩu
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="reg-confirm-password" name="confirm_password" placeholder="Nhập lại mật khẩu" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="register-button">
+                        <i class="fas fa-user-plus"></i> Đăng Ký Ngay
+                    </button>
+                </form>
+                
+                <div class="divider">
+                    <span>hoặc</span>
                 </div>
-                <div class="form-group">
-                    <label for="reg-password">Mật khẩu:</label>
-                    <input type="password" id="reg-password" name="password" required>
-                    <small style="color: #666;">Tối thiểu 6 ký tự</small>
-                </div>
-                <div class="form-group">
-                    <label for="reg-confirm-password">Xác nhận Mật khẩu:</label>
-                    <input type="password" id="reg-confirm-password" name="confirm_password" required>
-                </div>
-                <button type="submit" class="auth-button">Đăng Ký</button>
-                <p class="switch-link">Đã có tài khoản? <a href="DangNhap.html">Đăng nhập ngay</a></p>
+                
+                <p class="switch-link">
+                    Đã có tài khoản? 
+                    <a href="DangNhap.html">
+                        <i class="fas fa-sign-in-alt"></i> Đăng nhập ngay
+                    </a>
+                </p>     
                 <div id="register-message" class="message" style="display:none;"></div>
-            </form>
+            </div>
         </div>
     </main>
 
@@ -65,6 +431,7 @@
                     <li><a href="#">Giới thiệu</a></li>
                     <li><a href="#">Liên hệ</a></li>
                     <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="BanDo_Demo.html" style="color: #4CAF50; font-weight: bold;">🗺️ Xem Bản Đồ</a></li>
                 </ul>
             </div>
             <div class="footer-col footer-col-contact">
@@ -95,7 +462,7 @@
                 const formData = new FormData(registerForm);
                 
                 // Hiển thị loading
-                message.textContent = '⏳ Đang xử lý...';
+                message.textContent = ' Đang xử lý...';
                 message.className = 'message';
                 message.style.display = 'block';
                 
@@ -114,7 +481,11 @@
                     if (data.success) {
                         registerForm.reset();
                         setTimeout(() => {
-                            window.location.href = 'DangNhap.html';
+                            if (data.redirect) {
+                                window.location.href = data.redirect;
+                            } else {
+                                window.location.href = 'TrangChu.html';
+                            }
                         }, 1500);
                     }
                     
@@ -126,6 +497,267 @@
                 }
             });
         });
+    </script>
+</body>
+</html>
+    <!-- Enhanced Register Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const registerForm = document.getElementById('registerForm');
+            const usernameInput = document.getElementById('reg-username');
+            const emailInput = document.getElementById('reg-email');
+            const passwordInput = document.getElementById('reg-password');
+            const confirmPasswordInput = document.getElementById('reg-confirm-password');
+            const registerButton = document.querySelector('.register-button');
+            const message = document.getElementById('register-message');
+            const passwordStrengthBar = document.getElementById('passwordStrengthBar');
+            const passwordStrengthText = document.getElementById('passwordStrengthText');
+            
+            // Password strength checker
+            function checkPasswordStrength(password) {
+                let strength = 0;
+                let feedback = [];
+                
+                if (password.length >= 6) strength += 1;
+                else feedback.push('Ít nhất 6 ký tự');
+                
+                if (password.match(/[a-z]/)) strength += 1;
+                else feedback.push('Chữ thường');
+                
+                if (password.match(/[A-Z]/)) strength += 1;
+                else feedback.push('Chữ hoa');
+                
+                if (password.match(/[0-9]/)) strength += 1;
+                else feedback.push('Số');
+                
+                if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
+                else feedback.push('Ký tự đặc biệt');
+                
+                return { strength, feedback };
+            }
+            
+            // Update password strength indicator
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const result = checkPasswordStrength(password);
+                
+                // Remove all strength classes
+                passwordStrengthBar.className = 'password-strength-bar';
+                
+                if (password.length === 0) {
+                    passwordStrengthText.textContent = 'Tối thiểu 6 ký tự';
+                    return;
+                }
+                
+                // Add appropriate strength class
+                if (result.strength <= 1) {
+                    passwordStrengthBar.classList.add('strength-weak');
+                    passwordStrengthText.textContent = 'Mật khẩu yếu';
+                    passwordStrengthText.style.color = '#e74c3c';
+                } else if (result.strength <= 2) {
+                    passwordStrengthBar.classList.add('strength-fair');
+                    passwordStrengthText.textContent = 'Mật khẩu trung bình';
+                    passwordStrengthText.style.color = '#f39c12';
+                } else if (result.strength <= 3) {
+                    passwordStrengthBar.classList.add('strength-good');
+                    passwordStrengthText.textContent = 'Mật khẩu tốt';
+                    passwordStrengthText.style.color = '#f1c40f';
+                } else {
+                    passwordStrengthBar.classList.add('strength-strong');
+                    passwordStrengthText.textContent = 'Mật khẩu mạnh';
+                    passwordStrengthText.style.color = '#27ae60';
+                }
+            });
+            
+            // Real-time validation
+            function validateField(field, validationFn, errorMsg) {
+                field.addEventListener('blur', function() {
+                    if (!validationFn(this.value)) {
+                        this.style.borderColor = '#e74c3c';
+                        showFieldError(this, errorMsg);
+                    } else {
+                        this.style.borderColor = '#27ae60';
+                        hideFieldError(this);
+                    }
+                });
+            }
+            
+            function showFieldError(field, message) {
+                hideFieldError(field);
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'field-error';
+                errorDiv.textContent = message;
+                errorDiv.style.cssText = `
+                    color: #e74c3c;
+                    font-size: 0.8em;
+                    margin-top: 5px;
+                    animation: slideInDown 0.3s ease;
+                `;
+                field.parentNode.appendChild(errorDiv);
+            }
+            
+            function hideFieldError(field) {
+                const existingError = field.parentNode.querySelector('.field-error');
+                if (existingError) {
+                    existingError.remove();
+                }
+            }
+            
+            // Validation rules
+            validateField(usernameInput, 
+                value => /^[a-zA-Z0-9_]{3,20}$/.test(value),
+                'Tên đăng nhập phải 3-20 ký tự, chỉ chữ, số và _'
+            );
+            
+            validateField(emailInput,
+                value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+                'Email không hợp lệ'
+            );
+            
+            validateField(passwordInput,
+                value => value.length >= 6,
+                'Mật khẩu phải có ít nhất 6 ký tự'
+            );
+            
+            validateField(confirmPasswordInput,
+                value => value === passwordInput.value,
+                'Mật khẩu không khớp'
+            );
+            
+            // Form submission
+            if (!registerForm) {
+                console.error('Không tìm thấy form đăng ký');
+                return;
+            }
+            
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(registerForm);
+                const username = formData.get('username').trim();
+                const email = formData.get('email').trim();
+                const password = formData.get('password');
+                const confirmPassword = formData.get('confirm_password');
+                
+                // Validation
+                if (!username || !email || !password || !confirmPassword) {
+                    showMessage('Vui lòng nhập đầy đủ thông tin!', 'error');
+                    return;
+                }
+                
+                if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
+                    showMessage('Tên đăng nhập phải 3-20 ký tự, chỉ chữ, số và _', 'error');
+                    return;
+                }
+                
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showMessage('Email không hợp lệ!', 'error');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    showMessage('Mật khẩu phải có ít nhất 6 ký tự!', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showMessage('Mật khẩu không khớp!', 'error');
+                    return;
+                }
+                
+                // Show loading state
+                registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+                registerButton.disabled = true;
+                
+                try {
+                    const response = await fetch('register.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const data = await response.json();
+                    
+                    showMessage(data.message, data.success ? 'success' : 'error');
+                    
+                    if (data.success) {
+                        registerForm.reset();
+                        setTimeout(() => {
+                            if (data.redirect) {
+                                window.location.href = data.redirect;
+                            } else {
+                                window.location.href = 'TrangChu.html';
+                            }
+                        }, 1500);
+                    }
+                    
+                } catch (error) {
+                    console.error('Lỗi:', error);
+                    showMessage('❌ Có lỗi xảy ra. Vui lòng thử lại!', 'error');
+                } finally {
+                    registerButton.innerHTML = '<i class="fas fa-user-plus"></i> Đăng Ký Ngay';
+                    registerButton.disabled = false;
+                }
+            });
+            
+            // Show message function
+            function showMessage(text, type) {
+                message.textContent = text;
+                message.className = `message ${type === 'success' ? 'success-message' : 'error-message'}`;
+                message.style.display = 'block';
+                message.style.animation = 'slideInDown 0.3s ease';
+                
+                // Auto hide after 5 seconds
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 5000);
+            }
+            
+            // Add floating label effects
+            const inputs = document.querySelectorAll('.form-group input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                    this.style.transform = 'scale(1.02)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (this.value === '') {
+                        this.parentElement.classList.remove('focused');
+                    }
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+        
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .input-wrapper.focused input {
+                border-color: #4CAF50;
+                box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+            }
+            
+            .input-wrapper.focused i {
+                color: #4CAF50;
+            }
+            
+            .navbar .nav-links a.active {
+                background-color: #388E3C;
+                border-radius: 5px;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

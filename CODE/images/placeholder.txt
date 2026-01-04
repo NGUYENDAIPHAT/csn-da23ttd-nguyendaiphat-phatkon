@@ -1,0 +1,10 @@
+Thư mục này chứa hình ảnh của các di tích lịch sử.
+Các file hình ảnh sẽ được đặt tên theo format: [số]_[tên_di_tích].jpg
+
+Ví dụ:
+- 1_khu_tuong_niem_bac_ho.jpg
+- 2_van_thanh_mieu_vinh_long.jpg
+- 3_chua_tien_chau.jpg
+...
+
+Nếu không có hình ảnh, website sẽ hiển thị placeholder tự động.
